@@ -9,14 +9,15 @@ class StudentList extends StatelessWidget {
   Widget build(BuildContext context) {
     // StudentProvider studentProvider = Provider.of<StudentProvider>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Student List'),
-      ),
-      body: ListView.builder(
-            itemCount: 0,
-            itemBuilder: (BuildContext context, int index) {
-              return Consumer<StudentProvider>(builder: (context, value, child) {
-                child: Card(
+        appBar: AppBar(
+          title: Text('Student List'),
+        ),
+        body: ListView.builder(
+          itemCount: 0,
+          itemBuilder: (BuildContext context, int index) {
+            return Consumer<StudentProvider>(
+              builder: (context, model, child) {
+                return Card(
                   color: Color.fromARGB(255, 215, 243, 250),
                   elevation: 5,
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -142,11 +143,9 @@ class StudentList extends StatelessWidget {
                     ),
                   ),
                 );
-                },
-              );
-            },
-          );
-        },
-    );
+              },
+            );
+          },
+        ));
   }
 }

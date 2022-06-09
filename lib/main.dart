@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vdo/providers/student_provider.dart';
-import 'package:vdo/screens/student_list.dart';
+import 'package:vdo/screens/students_list/student_list.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => StudentProvider(), // constructor is getting called here for StudentProvider
+      create: (context) =>
+          StudentProvider(), // constructor is getting called here for StudentProvider
       child: StudentListDemoApp(),
     ),
   );
