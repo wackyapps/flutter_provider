@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-
-import 'screens/homepage.dart';
+import 'package:provider/provider.dart';
+import 'package:vdo/providers/student_provider.dart';
+import 'package:vdo/screens/student_list.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => StudentProvider(), // constructor is getting called here for StudentProvider
+      child: StudentListDemoApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class StudentListDemoApp extends StatelessWidget {
+  const StudentListDemoApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -15,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: homepage(),
+      home: StudentList(),
     );
   }
 }
