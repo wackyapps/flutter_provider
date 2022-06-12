@@ -10,6 +10,7 @@ class StudentProvider extends ChangeNotifier {
   StudentProvider() {
     isLoading = true;
     _listOfStudents = _studentRepository.getStudentList();
+
     isLoading = false;
   }
 

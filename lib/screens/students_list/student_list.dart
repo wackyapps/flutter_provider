@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vdo/models/student_model/student.dart';
 import 'package:vdo/providers/student_provider.dart';
+import 'package:vdo/screens/add_student.dart';
 
 class StudentList extends StatelessWidget {
   const StudentList({Key? key}) : super(key: key);
@@ -8,12 +10,14 @@ class StudentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // StudentProvider studentProvider = Provider.of<StudentProvider>(context, listen: false);
+    bool _loading = false;
     return Scaffold(
         appBar: AppBar(
           title: Text('Student List'),
         ),
         body: ListView.builder(
-          itemCount: 0,
+          itemCount:
+              Provider.of<StudentProvider>(context).listOfStudents.length,
           itemBuilder: (BuildContext context, int index) {
             return Consumer<StudentProvider>(
               builder: (context, model, child) {
@@ -123,16 +127,55 @@ class StudentList extends StatelessWidget {
                                       SizedBox(
                                         width: 15,
                                       ),
-                                      Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
+                                      InkWell(
+                                        onTap: () {
+                                          _loading = true;
+                                          Provider.of<StudentProvider>(context,
+                                                  listen: false)
+                                              .deleteStudent(
+                                            Student(
+                                              rollNo: model
+                                                  .listOfStudents[index].rollNo,
+                                              name: model
+                                                  .listOfStudents[index].name,
+                                              studentClass: model
+                                                  .listOfStudents[index]
+                                                  .studentClass,
+                                              age: model
+                                                  .listOfStudents[index].age,
+                                              gender: model
+                                                  .listOfStudents[index].gender,
+                                              email: model
+                                                  .listOfStudents[index].email,
+                                            ),
+                                          ); //
+
+                                          // Provider.of<StudentProvider>(context, listen: false).deleteStudent
+
+                                          // pass your controller variables here
+                                          _loading = false;
+                                        },
+                                        child: Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 15,
                                       ),
-                                      Icon(
-                                        Icons.add,
-                                        color: Colors.green,
+                                      InkWell(
+                                        onTap: (() {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => AddBooks(),
+                                            ),
+                                          );
+                                        }),
+                                        child: Icon(
+                                          Icons.add,
+                                          color: Colors.green,
+                                        ),
                                       ),
                                     ],
                                   ),
